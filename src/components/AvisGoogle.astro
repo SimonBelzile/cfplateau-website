@@ -1,0 +1,57 @@
+---
+import avis from "../data/avis.json";
+
+interface Props {
+  title?: string;
+  limit?: number;   // how many to show
+  ids?: string[];   // show specific ids in this order
+}
+const { title = "Ce que disent nos membres", limit = 3, ids = [] } = Astro.props;
+
+let items = avis as any[];
+if (ids.length) {
+  const pick = new Set(ids);
+  items = items.filter(r => pick.has(r.id));
+  // reorder according to ids
+  items.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+}
+items = items.slice(0, limit);
+const five = Array.from({ length: 5 });
+---
+
+<section class="mt-12">
+  <h2 class="text-2xl font-semibold">{title}</h2>
+
+  <div class="mt-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+    {items.map((r) => (
+      <figure class="card bg-white">
+        <div class="flex items-center gap-3">
+          <img src={r.profile_photo_url} alt={r.author_name} class="h-10 w-10 rounded-full object-cover" loading="lazy" />
+          <div>
+            <figcaption class="text-sm font-semibold">{r.author_name}</figcaption>
+            <p class="text-xs text-slate-500">{r.relative_time}</p>
+          </div>
+        </div>
+
+        <div class="mt-3 flex items-center gap-1 text-[#ddb669]" aria-label={`Note ${r.rating} sur 5`}>
+          {five.map((_, i) => (
+            <svg viewBox="0 0 20 20" class={`h-4 w-4 fill-current ${i < r.rating ? "" : "opacity-30"}`} aria-hidden="true">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.036 3.176a1 1 0 00.95.69h3.338c.967 0 1.371 1.24.588 1.81l-2.701 1.963a1 1 0 00-.364 1.118l1.036 3.176c.3.921-.755 1.688-1.538 1.118l-2.701-1.963a1 1 0 00-1.176 0l-2.701 1.963c-.783.57-1.838-.197-1.538-1.118l1.036-3.176a1 1 0 00-.364-1.118L2.137 8.603c-.783-.57-.38-1.81.588-1.81h3.338a1 1 0 00.95-.69l1.036-3.176z" />
+            </svg>
+          ))}
+          <span class="ml-2 text-xs text-slate-600">{r.rating}.0</span>
+        </div>
+
+        <blockquote class="mt-3 text-slate-700">{r.text}</blockquote>
+
+        <a href={r.url} target="_blank" rel="noopener" class="mt-4 inline-flex text-xs font-semibold text-slate-600 underline">
+          Voir sur Google
+        </a>
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  .card { @apply rounded-2xl border bg-white p-5 shadow-sm; }
+</style>

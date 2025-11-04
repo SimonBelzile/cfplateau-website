@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+---
+<Base title="Horaire — Abattoir CrossFit Plateau">
+  <h1 class="text-3xl font-bold mb-4">Horaire</h1>
+  <p class="text-slate-600 mb-6">Réserve ta séance directement ci-dessous.</p>
+
+  <!-- TeamUp embed -->
+  <script src="https://teamupstatic.com/teamup.js" defer></script>
+  <script is:inline>
+    // S'assure que le script est chargé avant d'appeler teamup.calendar
+    document.addEventListener("DOMContentLoaded", () => {
+      const start = () => {
+        if (window.teamup?.calendar) {
+          window.teamup.calendar({
+            provider_id: 22569,
+            width: "100%",
+            view: "list",
+          });
+        } else {
+          // attend un peu si le script n'est pas encore prêt
+          setTimeout(start, 50);
+        }
+      };
+      start();
+    });
+  </script>
+</Base>

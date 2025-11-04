@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rev-Antoine",
+    "author_name": "Antoine Agati",
+    "rating": 5,
+    "text": "Des coachs d’excellente qualité, et des programmes de 6 semaines adaptés pour débutants très bien faits. \nUne super ambiance!",
+    "relative_time": "il y a 12 mois",
+    "profile_photo_url": "/AA.png",
+    "url": "https://share.google/iR46J9cbLbjZndjhW"
+  },
+  {
+    "id": "rev-fleur",
+    "author_name": "Fleur Marty.",
+    "rating": 5,
+    "text": "I've been training at l'Abattoir for two years now (after spending 7 years in another CF gym) and I really love it!\nIt has a nice community and a good range of coaches who are all very knowledgeable. The programming is great and varied (especially since the switch to HWPO) and the owners are continuously investing in renewing or upgrading equipment.\nWhether you're looking for a place to drop in while in town or a new gym to call home, I highly recommend it!",
+    "relative_time": "il y a 1 an",
+    "profile_photo_url": "/FD.png",
+    "url": "https://maps.app.goo.gl/8mJ7o4HBB27cE7Gp6"
+  },
+  {
+    "id": "rev-diana",
+    "author_name": "Diana Elizalde",
+    "rating": 5,
+    "text": "After training in different CrossFit gyms, I tried CrossFit plateau and never left. It has been 11 years now… I love the environment, coaches are nice, professional and always focusing on technique over pr’s or heavy weights, 6am classes available",
+    "relative_time": "il y a 1 mois",
+    "profile_photo_url": "/diana.png",
+    "url": "https://maps.app.goo.gl/pvN5nA1gNRGn4ckR9"
+  },
+  {
+    "id": "rev-marie",
+    "author_name": "Li Marie",
+    "rating": 5,
+    "text": "Great gym! Coaches are nice, professionnal and always willing to help you get better. Great location, multiple classes, all the equipment you need... I would definitely recommend this gym to anyone who wants to get in shape in an inspiring environment",
+    "relative_time": "il y a 10 ans",
+    "profile_photo_url": "/mariel.png",
+    "url": "https://maps.app.goo.gl/VSLJHx1DnYS7YXX56"
+  }
+]

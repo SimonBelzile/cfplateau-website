@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply bg-black text-white min-h-screen;
+  }
+  a {
+    @apply text-[#ddb669];
+  }
+
+}
+
+@layer utilities {
+  /* fond doux en pointillé */
+  .bg-dots {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgb(226 232 240/.6) 1px, transparent 0);
+    background-size: 18px 18px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 font-semibold text-slate-900;
+    background-color: #ddb669;
+    }
+    .btn-primary:hover { background-color: #c9a659; }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-xl border px-5 py-2.5 font-semibold;
+    border-color: #ddb669; color: #ddb669;
+    }
+    .btn-ghost:hover { background-color: #ddb6691a; }
+  .card {
+    @apply relative h-full rounded-2xl border bg-white p-6 shadow-card transition
+           hover:shadow-cardHover animate-in;
+  }
+  .card-featured {
+    /* léger contour dégradé */
+    background:
+      linear-gradient(white,white) padding-box,
+      linear-gradient(135deg, #477bff 0%, #9fc0ff 100%) border-box;
+    border: 2px solid transparent;
+  }
+  .chip { @apply rounded-full border px-3 py-1 text-xs text-slate-700 bg-white; }
+  .ribbon {
+    @apply absolute -top-3 left-5 rounded-full px-3 py-1 text-xs font-semibold text-white shadow;
+    background: linear-gradient(90deg, #2f62f2, #6f9bff);
+  }
+  .section {
+    @apply mb-12;
+  }
+  .section--hero {
+    @apply border rounded-2xl p-6 md:p-8 bg-gradient-to-br from-brand-50 to-white;
+  }
+}

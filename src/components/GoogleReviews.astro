@@ -1,0 +1,81 @@
+---
+let featured = [];
+try {
+  const mod = await import("../data/featured-reviews.json");
+  featured = Array.isArray(mod.default) ? mod.default : [];
+} catch (_) {}
+
+const API_KEY  = import.meta.env.GOOGLE_PLACES_API_KEY;
+const PLACE_ID = import.meta.env.GOOGLE_PLACE_ID;
+
+let reviews = [];
+let rating = null;
+let total = null;
+
+if (featured.length > 0) {
+  // On affiche exactement tes avis “mis de l’avant”
+  reviews = featured.slice(0, 3);
+} else {
+  // Fallback: on va chercher Google (comme avant)
+  try {
+    if (!API_KEY || !PLACE_ID) throw new Error("Missing env");
+    const url = new url("https://maps.googleapis.com/maps/api/place/details/json");
+    url.searchParams.set("placeid", PLACE_ID);
+    url.searchParams.set("fields", "rating,user_ratings_total,reviews");
+    url.searchParams.set("key", API_KEY);
+
+    const res = await fetch(url.toString());
+    const data = await res.json();
+
+    if (data?.result) {
+      rating = data.result.rating ?? null;
+      total  = data.result.user_ratings_total ?? null;
+      reviews = (data.result.reviews ?? [])
+        .filter(r => r.text)
+        .sort((a,b) => (b.rating ?? 0) - (a.rating ?? 0))
+        .slice(0, 3);
+    }
+  } catch (e) {}
+}
+---
+
+{reviews.length > 0 ? (
+  <section class="mt-12">
+    <h2 class="text-2xl font-semibold">Avis Google</h2>
+    {rating || total ? (
+      <p class="mt-1 text-sm text-slate-600">
+        {rating ? `Note ${rating}/5` : ""} {total ? `· ${total} avis` : ""}
+      </p>
+    ) : null}
+
+    <div class="mt-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+      {reviews.map((r) => (
+        <figure class="card">
+          <div class="flex items-center gap-2">
+            <div class="font-semibold">{r.author_name}</div>
+            {typeof r.rating === "number" && <div class="text-xs text-slate-500">({r.rating}★)</div>}
+          </div>
+          <blockquote class="mt-2 text-slate-700 text-sm leading-relaxed">
+            {r.text}
+          </blockquote>
+          {r.relative_time_description && (
+            <figcaption class="mt-3 text-xs text-slate-500">
+              {r.relative_time_description}
+            </figcaption>
+          )}
+          {r.author_url && (
+            <a href={r.author_url} target="_blank" rel="noopener" class="mt-3 inline-block text-xs underline text-slate-600">
+              Voir sur Google
+            </a>
+          )}
+        </figure>
+      ))}
+    </div>
+
+    <div class="mt-4">
+      <a href={"https://www.google.com/maps/search/?api=1&query="} target="_blank" rel="noopener" class="text-sm underline text-slate-600">
+        Voir tous les avis
+      </a>
+    </div>
+  </section>
+) : null}

@@ -1,0 +1,33 @@
+---
+const SUGARWOD_ID = import.meta.env.PUBLIC_SUGARWOD_ID || "SDZKFZZAtB";
+---
+
+<!-- Load SugarWOD plugin and let it render its own floating launcher -->
+<script is:inline>
+  // Configure the board to load
+  window.sugarwod_options = { id: "SDZKFZZAtB" };
+  (function () {
+    const s = document.createElement('script');
+    s.src="https://cdn.sugarwod.com/plugin/v1/sugarwod-plugin.js";
+    s.async = true;
+    document.body.appendChild(s);
+  })();
+</script>
+
+<style is:global>
+  /* Recolor the SugarWOD launcher to gold */
+  /* (The plugin’s markup can vary; these selectors cover the common cases) */
+  .sugarwod-launcher button,
+  [class*="sugarwod-launcher"] button,
+  [id^="sugarwod-launcher"] button {
+    background: #ddb669 !important;
+    color: #111 !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,.25) !important;
+    border: none !important;
+  }
+  .sugarwod-launcher button:hover,
+  [class*="sugarwod-launcher"] button:hover,
+  [id^="sugarwod-launcher"] button:hover {
+    background: #c9a659 !important;
+  }
+</style>

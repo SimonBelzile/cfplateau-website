@@ -1,0 +1,256 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import AvisGoogle from "../components/AvisGoogle.astro";
+import { Image } from 'astro:assets';
+
+// Move these files to src/assets/ with the same names:
+import hero from "../assets/group-photo.jpg";
+import card1 from "../assets/group-PP.jpg";
+import card2 from "../assets/hiit-main.jpg";
+import card3 from "../assets/pat-correctif-deadlift.jpg";
+---
+
+<Base title="Abattoir CrossFit Plateau — Bienvenue">
+
+  <!-- HERO plein écran avec overlay -->
+  <section class="relative isolate h-[68svh] md:h-[72svh] lg:h-[76svh] min-h-[520px] w-screen ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] overflow-hidden">
+    <!-- Image de fond -->
+    <Image
+      src={hero}
+      alt="Abattoir CrossFit — entraînement"
+      class="absolute inset-0 h-full w-full object-cover object-center z-0"
+      widths={[640, 960, 1280, 1600, 1920]}
+      sizes="100vw"
+      loading="eager"
+      format="webp"
+    />
+
+    <!-- Overlay au-dessus de l'image -->
+    <div class="absolute inset-0 z-10 pointer-events-none">
+      <div class="absolute inset-0 bg-black/55"></div>
+      <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent"></div>
+    </div>
+
+    <!-- Contenu du hero -->
+    <div class="relative z-10 mx-auto max-w-6xl px-4 h-full flex items-center justify-center text-center text-white">
+      <div>
+        <span class="inline-block text-xs md:text-sm tracking-[.28em] uppercase opacity-80">
+          Effort au-dessus de tout
+        </span>
+
+        <h1 class="mt-3 text-5xl md:text-7xl font-extrabold md:leading-[1.05]">
+          Nous ne sommes pas<br>qu’un autre gym
+        </h1>
+
+        <p class="mt-3 text-base md:text-lg text-white/90">
+          CrossFit. Nutrition. Encadrement. Résultats.
+        </p>
+
+        <div class="mt-5 md:mt-6 flex items-center justify-center gap-3 md:gap-4">
+          <a href="/essai" data-open-lead
+            class="inline-flex items-center rounded-xl bg-[#ddb669] text-slate-900
+                    px-6 py-3 md:px-7 md:py-3.5 text-base md:text-lg font-semibold
+                    shadow-lg ring-1 ring-black/10 hover:bg-[#c9a659] focus-visible:ring-2 focus-visible:ring-[#ddb669]">
+            Je m’inscris
+          </a>
+          <a href="/tarifs"
+            class="inline-flex items-center rounded-xl border border-[#ddb669] text-[#ddb669]
+                    px-6 py-3 md:px-7 md:py-3.5 text-base md:text-lg font-semibold
+                    shadow-lg ring-1 ring-black/10 hover:bg-[#ddb6691a] focus-visible:ring-2 focus-visible:ring-[#ddb669]">
+            Options d’abonnement
+          </a>
+        </div>
+
+        <dl class="mt-6 grid grid-cols-2 gap-8 text-left md:max-w-md mx-auto">
+          <div>
+            <dt class="text-xs md:text-sm text-white/70">Membres actifs</dt>
+            <dd class="text-2xl md:text-3xl font-bold">400+</dd>
+          </div>
+          <div>
+            <dt class="text-xs md:text-sm text-white/70">Séances / semaine</dt>
+            <dd class="text-2xl md:text-3xl font-bold">60+</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GUARANTEE ========== -->
+  <section class="bg-black text-white">
+    <div class="mx-auto max-w-7xl px-6 md:px-8 py-16 md:py-20">
+      <div class="grid items-start gap-10 md:gap-16 md:grid-cols-[1.2fr_1fr]">
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+          Notre garantie
+        </h2>
+        <p class="text-base md:text-lg text-white/85 leading-relaxed">
+          A CrossFit Plateau, nous savons exactement ce qu'il pour que nos athlètes obitennent des résultats concrets et durables qui vous transformerons à l'intérieur mais aussi a l'extérieur du gym. 
+          Rejoignez-nous aujourd'hui!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OFFERINGS (3 tuiles) ========== -->
+  <section class="bg-black text-white">
+    <div class="mx-auto max-w-7xl px-6 pb-24">
+      <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+        Offres
+      </h3>
+
+      <div class="mt-10 grid gap-12 md:grid-cols-3 items-start">
+        <!-- Col 1 -->
+        <div class="md:mt-0 lg:-mt-2">
+          <a href="/offre-de-cours#crossfit" class="group block">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                src={card1}
+                alt="CrossFit"
+                class="h-[460px] md:h-[520px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                widths={[640, 960, 1280, 1600]}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                loading="lazy"
+                format="webp"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-5 left-5">
+                <span class="block text-4xl md:text-5xl font-extrabold uppercase tracking-wide">
+                  CrossFit
+                </span>
+              </div>
+            </div>
+            <p class="mt-4 text-center text-slate-300 text-sm md:text-base">
+              Progresse en sécurité: charges adaptées, mouvements enseignés, communauté qui t’encourage.
+            </p>
+          </a>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="md:-mt-8 lg:mt-10">
+          <a href="/tarifs#HIIT-SWEAT-HYROX" class="group block">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                src={card2}
+                alt="HYROX & HIIT-SWEAT"
+                class="h-[460px] md:h-[520px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                widths={[640, 960, 1280, 1600]}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                loading="lazy"
+                format="webp"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-5 left-5">
+                <span class="block text-4xl md:text-5xl font-extrabold uppercase tracking-wide">
+                  HYROX & HIIT-SWEAT
+                </span>
+              </div>
+            </div>
+            <p class="mt-4 text-center text-slate-300 text-sm md:text-base">
+              40–45 min pour transpirer et se mettre en shape: circuits accessibles, options pour tous niveaux.
+            </p>
+          </a>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="md:mt-16 lg:mt-24">
+          <a href="/tarifs#privé" class="group block">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                src={card3}
+                alt="Entraînement privé"
+                class="h-[460px] md:h-[520px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                widths={[640, 960, 1280, 1600]}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                loading="lazy"
+                format="webp"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-5 left-5">
+                <span class="block text-4xl md:text-5xl font-extrabold uppercase tracking-wide">
+                  Semi-privé
+                </span>
+              </div>
+            </div>
+            <p class="mt-4 text-center text-slate-300 text-sm md:text-base">
+              Avance sur des objectifs précis en petit groupe.
+            </p>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- POURQUOI NOUS, APERÇU HORAIRE, AVIS, FAQ, CTA (inchangés) -->
+  <AvisGoogle limit={3} />
+
+  <!-- MODAL Contact (GoTeamUp) -->
+  <div id="leadModal" class="fixed inset-0 z-[60] hidden">
+    <div id="leadBackdrop" class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="w-full max-w-3xl rounded-2xl border bg-white shadow-card relative max-h-[85vh] overflow-auto">
+        <button id="closeLead" class="absolute right-2 top-2 rounded-full border px-2 py-1 text-sm">Fermer ✕</button>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold mb-1 text-slate-900">S’inscrire / Nous contacter</h3>
+          <p class="text-slate-600 mb-4">Remplis le formulaire — on te revient rapidement.</p>
+
+          <div class="rounded-xl overflow-hidden border bg-white">
+            <script defer src="https://teamupstatic.com/teamup.js" type="text/javascript"></script>
+            <script is:lazy type="text/javascript">
+              (function initTeamUp() {
+                function ready() {
+                  try {
+                    // @ts-ignore
+                    teamup.lead_form({
+                      provider_id: 22569,
+                      width: "100%",
+                      version: 3,
+                      lead_form_id: "862b9968-ddf5-4dce-95ef-198cd07c3f79",
+                    });
+                  } catch (e) {
+                    console.error("TeamUp lead_form error:", e);
+                  }
+                }
+                // @ts-ignore
+                if (window.teamup && typeof teamup.lead_form === "function") {
+                  ready();
+                } else {
+                  window.addEventListener("load", ready, { once: true });
+                }
+              })();
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style is:global>
+    .card { @apply rounded-2xl border bg-white p-5 shadow-sm; }
+  </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal    = document.getElementById('leadModal');
+      const closeBtn = document.getElementById('closeLead');
+      const backdrop = document.getElementById('leadBackdrop');
+      const openers  = Array.from(document.querySelectorAll('[data-open-lead]'));
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      openers.forEach(el => el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      }));
+      closeBtn?.addEventListener('click', closeModal);
+      backdrop?.addEventListener('click', closeModal);
+      window.addEventListener('keydown', (e) => e.key === 'Escape' && !modal.classList.contains('hidden') && closeModal());
+    });
+  </script>
+</Base>

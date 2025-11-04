@@ -1,0 +1,16 @@
+---
+const { title, subtitle, ctaText = "Commencer", ctaHref="/essai" } = Astro.props;
+---
+<section class="py-10 md:py-16">
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">{title}</h1>
+      <p class="mt-4 text-lg text-slate-600">{subtitle}</p>
+      <div class="mt-6 flex gap-3">
+        <a href={ctaHref} class="inline-flex items-center rounded-xl bg-black text-white px-5 py-3">{ctaText}</a>
+        <a href="/tarifs" class="inline-flex items-center rounded-xl border px-5 py-3">Voir les tarifs</a>
+      </div>
+    </div>
+    <div class="aspect-video rounded-2xl bg-slate-100"></div>
+  </div>
+</section>

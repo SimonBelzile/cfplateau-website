@@ -1,0 +1,35 @@
+---
+---
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test Lead TeamUp</title>
+    <script src="https://teamupstatic.com/teamup.js" defer></script>
+    <style>
+      body{font-family:system-ui,Segoe UI,Roboto,Inter,Arial}
+      #mount{max-width:720px;margin:40px auto;border:1px solid #e5e7eb;border-radius:12px;padding:16px}
+      iframe{width:100% !important; min-height:520px; display:block}
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align:center">Test Lead Form</h1>
+    <div id="mount">Chargement…</div>
+
+    <script>
+      window.addEventListener('load', function () {
+        const mount = document.getElementById('mount');
+        mount.textContent = '';
+        // ⚠️ mêmes paramètres que ton site
+        teamup.lead_form({
+          provider_id: 22569,
+          width: "100%",
+          version: 3,
+          lead_form_id: "862b9968-ddf5-4dce-95ef-198cd07c3f79",
+          container: "#mount",
+          container_id: "mount",
+        });
+      });
+    </script>
+  </body>
+</html>

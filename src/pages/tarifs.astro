@@ -1,0 +1,187 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+
+// TPS+TVQ (QC)
+const TAX_RATE = 0.14975;
+
+type Plan = {
+  name: string;
+  months: number;          // 0 = essai (pas de total légal)
+  monthly?: number;        // prix mensuel numérique pour abonnements
+  priceLabel?: string;     // texte libre (essais, etc.)
+  details: string[];
+  href?: string;           // lien TeamUp
+};
+type Section = { title: string; plans: Plan[] };
+
+// ---------- 1) ESSAIS EN TÊTE ----------
+const essais: Section = {
+  title: "Abonnements / essai",
+  plans: [
+    {
+      name: "1 semaine illimitée — Intro CrossFit",
+      months: 0,
+      priceLabel: "$30 +tx",
+      details: ["Accès illimité aux cours d’introduction", "Idéal pour débutant·es"],
+      href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/212564/",
+    },
+    {
+      name: "Introduction CrossFit — 2x/sem (6 semaines)",
+      months: 0,
+      priceLabel: "$60 +tx / 2 semaines",
+      details: ["2x par semaine pendant 6 semaines", "Cours d’introduction au CrossFit"],
+      href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/205935/",
+    },
+    {
+      name: "Introduction CrossFit — 5x/sem (6 semaines)",
+      months: 0,
+      priceLabel: "$75 +tx / 2 semaines",
+      details: ["5x par semaine pendant 6 semaines", "Cours d’introduction au CrossFit"],
+      href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/205936/",
+    },
+    {
+      name: "Essai 2 semaines — HIIT / SWEAT",
+      months: 0,
+      priceLabel: "Prix à confirmer",
+      details: ["Accès aux cours HIIT / SWEAT", "Durée : 14 jours"],
+      href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/234623/",
+    },
+  ],
+};
+
+// ---------- 2) ABONNEMENTS RÉGULIERS ----------
+// Base 12 mois (référence)
+const base12: Plan[] = [
+  { name: "Illimités",   months: 12, monthly: 165, details: ["Accès illimité aux cours de groupe"], href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/727/" },
+  { name: "4x semaines", months: 12, monthly: 145, details: ["4 cours par semaine (≈104/an)"],     href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/724/" },
+  { name: "3x semaines", months: 12, monthly: 130, details: ["3 cours par semaine (≈78/an)"],      href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/720/" },
+  { name: "2x semaines", months: 12, monthly: 110, details: ["2 cours par semaine (≈52/an)"],      href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/1683/" },
+];
+// Helper d’ajustement
+const adjust = (plans: Plan[], months: number, delta: number, hrefOverrides: Record<string,string> = {}): Plan[] =>
+  plans.map(p => ({
+    ...p,
+    months,
+    monthly: (p.monthly ?? 0) + delta,
+    href: hrefOverrides[p.name] ?? p.href,
+  }));
+
+// 6 mois = 12m + 10$ / mois (liens fournis)
+const base6 = adjust(base12, 6, 10, {
+  "4x semaines": "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/723/",
+  "3x semaines": "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/719/",
+  "2x semaines": "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/11617/",
+  // "Illimités": conserver 727 sauf si tu as un ID spécifique 6m
+});
+
+// 3 mois = 12m + 15$ / mois
+const base3 = adjust(base12, 3, 15, {
+  "Illimités":   "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/725/",
+  "4x semaines": "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/722/",
+  "3x semaines": "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/718/",
+  "2x semaines": "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/11617/",
+});
+
+// 1 mois = 12m + 20$ / mois
+const base1: Plan[] = [
+  { name: "Illimités",   months: 1, monthly: 165 + 20, details: ["Accès illimité aux cours de groupe"], href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/725/" },
+  { name: "4x semaines", months: 1, monthly: 145 + 20, details: ["≈17 cours / mois"], href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/721/" },
+  { name: "3x semaines", months: 1, monthly: 130 + 20, details: ["≈13 cours / mois"], href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/717/" },
+  { name: "2x semaines", months: 1, monthly: 110 + 20, details: ["≈9 cours / mois"],  href: "https://goteamup.com/p/22569-abattoir-crossfit-plateau/memberships/164902/" },
+];
+
+const sections: Section[] = [
+  essais,
+  { title: "Contrats de 12 mois", plans: base12 },
+  { title: "Contrats de 6 mois",  plans: base6  },
+  { title: "Contrats de 3 mois",  plans: base3  },
+  { title: "Contrats de 1 mois",  plans: base1  },
+];
+
+// ---- helpers d'affichage
+const fmt = (n: number) => `$${n.toFixed(2).replace(/\.00$/, "")}`;
+const monthLabel = (m: number) => (m > 1 ? `${m} mois` : `1 mois`);
+const showTotals = (p: Plan) => p.months >= 3 && typeof p.monthly === "number";
+const totalBeforeTax = (p: Plan) => (p.monthly ?? 0) * p.months;
+const totalWithTax = (p: Plan) => totalBeforeTax(p) * (1 + TAX_RATE);
+---
+
+<Base title="Tarifs — Abattoir CrossFit Plateau">
+  <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Tarifs</h1>
+  <p class="mt-3 text-slate-600">Choisis l’option qui te convient : essais, introduction, puis abonnements réguliers.</p>
+
+  {sections.map((s, idx) => (
+    <section class={`section ${idx === 0 ? "section--hero" : ""}`}>
+      <h2 class="text-2xl font-semibold mb-5">{s.title}</h2>
+      {idx === 0 && (
+        <p class="mt-1 mb-4 text-slate-600 text-sm italic">
+          Ces abonnements donnent uniquement accès aux cours d’introduction.
+        </p>
+      )}
+      {/* Grille fluide : 240px mini → 3–6 colonnes selon largeur */}
+      <div class="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
+        {s.plans.map((p) => {
+          const featured = p.name === "Illimités" && p.months >= 3; // Mise en avant auto (ajuste si tu veux)
+          return (
+            <article class={`card ${featured ? "card-featured" : ""}`}>
+              {featured && <div class="ribbon">Populaire</div>}
+
+              <div class="flex items-baseline justify-between gap-3">
+                <h3 class="text-lg font-semibold tracking-tight">{p.name}</h3>
+                {p.months > 0 && <span class="chip">{monthLabel(p.months)}</span>}
+              </div>
+
+              {/* Prix */}
+              <p class="mt-2 text-3xl md:text-4xl font-extrabold">
+                {typeof p.monthly === "number"
+                  ? `${fmt(p.monthly)} +tx${p.months>0 ? " / mois" : ""}`
+                  : (p.priceLabel ?? "Prix à confirmer")}
+              </p>
+
+              {/* Détails */}
+              <ul class="mt-4 space-y-2 text-slate-600 text-sm">
+                {p.details.map((d) => (
+                  <li class="flex gap-2">
+                    <svg class="mt-1 h-4 w-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Totaux légaux (>= 3 mois) */}
+              {showTotals(p) && (
+                <div class="mt-5 rounded-xl bg-slate-50 p-4 text-sm">
+                  <div class="flex items-center justify-between">
+                    <span>Total contrat (avant taxes)</span>
+                    <strong>{fmt(totalBeforeTax(p))}</strong>
+                  </div>
+                  <div class="mt-1 flex items-center justify-between text-slate-600">
+                    <span>Total avec taxes (est. {Math.round(TAX_RATE*1000)/10}%)</span>
+                    <strong>{fmt(totalWithTax(p))}</strong>
+                  </div>
+                </div>
+              )}
+
+              <a
+                href={p.href ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 btn-primary w-full justify-center disabled:opacity-50"
+                aria-disabled={!p.href}
+              >
+                {p.href ? "Acheter" : "Acheter (bientôt)"}
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  ))}
+
+  <p class="mt-8 text-xs leading-relaxed text-slate-500">
+    * Prix sujets à changement. Taxes en sus. Les totaux “avec taxes” sont une estimation basée sur la TPS/TVQ (14.975%)
+    et sont fournis à titre informatif; le montant final est confirmé au moment de l’achat.
+  </p>
+</Base>

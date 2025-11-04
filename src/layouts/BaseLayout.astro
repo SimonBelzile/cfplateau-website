@@ -1,0 +1,187 @@
+---
+import "../styles/global.css";
+import WODWidget from "../components/WODWidget.astro";
+import Footer from "../components/Footer.astro";
+import { Image } from 'astro:assets';
+import logo from "@/assets/logo-abattoir.webp";
+
+/** Props SEO */
+type Props = { title?: string; description?: string; ogImage?: string };
+const { title: _title, description: _description, ogImage } = Astro.props as Props;
+
+const title =
+  _title ?? "CrossFit Plateau — Abattoir CrossFit Plateau";
+const description =
+  _description ?? "Le meilleur gym CrossFit à Montréal — Coaching, communauté et résultats garantis.";
+const site = Astro.site?.toString() ?? "";
+const canonical = site ? new URL(Astro.url.pathname, site).toString() : undefined;
+const og = ogImage ?? "/group-photo.jpg";
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={og} />
+    <meta property="og:url" content={canonical ?? ""} />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen bg-black text-slate-900">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white border-b">
+      <nav class="max-w-6xl mx-auto px-4 py-3 md:py-4 flex items-center gap-4 md:gap-6">
+        <!-- Logo -->
+        <a href="/" class="shrink-0 inline-flex items-center">
+          <img src="\logo-abattoir.webp" alt="Abattoir CrossFit Plateau" class="h-10 w-auto md:h-12" loading="eager" decoding="async" />
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-6">
+          <a href="/horaire" class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80">Horaire</a>
+          <a href="/tarifs"  class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80">Tarifs</a>
+          <a href="/comment-debuter" class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80">Commencer</a>
+
+          <!-- À propos (dropdown sans flicker) -->
+          <div class="relative group">
+            <button
+              class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80 inline-flex items-center"
+              aria-haspopup="true" aria-expanded="false" id="apropos-btn"
+            >
+              À&nbsp;propos
+              <svg class="ml-1 h-3 w-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M5.5 7.5 10 12l4.5-4.5" />
+              </svg>
+            </button>
+
+            <!-- Wrapper avec pt-2 pour “bridger” le hover -->
+            <div class="absolute left-0 top-full pt-2 z-50">
+              <div
+                class="w-64 rounded-xl border bg-white shadow-lg p-2
+                       opacity-0 translate-y-1 pointer-events-none
+                       transition duration-150
+                       group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                       group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto"
+                role="menu" aria-labelledby="apropos-btn"
+              >
+                <a href="/notre-equipe" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  Notre équipe
+                </a>
+                <a href="/histoire-mission-valeurs" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  Histoire · Mission · Valeurs
+                </a>
+                <a href="/offre-de-cours" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  Nos cours
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spacer -->
+        <div class="hidden md:block ml-auto"></div>
+
+        <!-- CTA desktop -->
+        <a href="/contact"
+           class="hidden md:inline-flex ml-auto items-center rounded-lg border px-4 py-2 md:px-5 md:py-2.5
+                  text-sm md:text-base font-semibold !text-black hover:bg-black/5">
+          Nous joindre
+        </a>
+
+        <!-- Burger (mobile) -->
+        <button
+          class="ml-auto md:hidden inline-flex items-center justify-center rounded-md border px-3 py-2 text-black"
+          aria-controls="mobile-menu" aria-expanded="false" id="openMobile"
+        >
+          <span class="sr-only">Ouvrir le menu</span>
+          <!-- icon -->
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile drawer -->
+      <div id="mobile-menu" class="md:hidden hidden border-t bg-white">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          <span class="text-sm font-semibold text-black">Menu</span>
+          <button id="closeMobile" class="rounded-md border px-3 py-1 text-black">
+            Fermer
+          </button>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 pb-4 grid gap-2">
+          <a href="/horaire" class="block rounded-lg px-3 py-2 font-semibold text-black hover:bg-black/5">Horaire</a>
+          <a href="/tarifs" class="block rounded-lg px-3 py-2 font-semibold text-black hover:bg-black/5">Tarifs</a>
+          <a href="/comment-debuter" class="block rounded-lg px-3 py-2 font-semibold text-black hover:bg-black/5">Commencer</a>
+
+          <!-- Sous-sections À propos (simples liens empilés) -->
+          <div class="mt-2 rounded-lg border bg-white">
+            <div class="px-3 pt-3 pb-1 text-xs uppercase tracking-wider text-slate-500">À propos</div>
+            <a href="/notre-equipe" class="block px-3 py-2 text-black hover:bg-black/5">Notre équipe</a>
+            <a href="/histoire-mission-valeurs" class="block px-3 py-2 text-black hover:bg-black/5">Histoire · Mission · Valeurs</a>
+            <a href="/offre-de-cours" class="block px-3 py-2 text-black hover:bg-black/5">Nos cours</a>
+          </div>
+
+          <a href="/contact" class="mt-2 inline-flex items-center justify-center rounded-lg border px-4 py-2 font-semibold text-black hover:bg-black/5">
+            Nous joindre
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="max-w-7xl mx-auto px-6 md:px-8 py-10">
+      <slot />
+    </main>
+
+    <Footer />
+    <WODWidget />
+
+    <!-- Mobile menu script -->
+    <script is:inline>
+      const openBtn = document.getElementById('openMobile');
+      const closeBtn = document.getElementById('closeMobile');
+      const menu = document.getElementById('mobile-menu');
+
+      function openMenu() {
+        menu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        openBtn?.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        menu.classList.add('hidden');
+        document.body.style.overflow = '';
+        openBtn?.setAttribute('aria-expanded', 'false');
+      }
+
+      openBtn?.addEventListener('click', openMenu);
+      closeBtn?.addEventListener('click', closeMenu);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !menu.classList.contains('hidden')) closeMenu();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "abattoir-crossfit-plateau",
+  "version": "0.0.2",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.17 <23"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "npx": "^3.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.15.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "sharp": "^0.34.4",
+    "tailwindcss": "^3.4.17"
+  }
+}

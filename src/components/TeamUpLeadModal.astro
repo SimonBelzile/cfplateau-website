@@ -1,0 +1,271 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+---
+
+<Base title="Abattoir CrossFit Plateau — Bienvenue">
+  <!-- HERO -->
+  <section class="relative overflow-hidden rounded-2xl border bg-white">
+    <!-- bg image -->
+    <img
+      src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1920&auto=format&fit=crop"
+      alt="Entraînement CrossFit"
+      class="absolute inset-0 h-full w-full object-cover opacity-30"
+      loading="eager"
+    />
+    <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
+      <div class="max-w-2xl">
+        <span class="inline-flex items-center rounded-full border bg-white/70 px-3 py-1 text-xs font-semibold">
+          Plateau Mont-Royal • Communauté
+        </span>
+        <h1 class="mt-4 text-4xl font-extrabold tracking-tight md:text-6xl">
+          Plus fort·e, ensemble.
+        </h1>
+        <p class="mt-4 text-lg text-slate-700">
+          CrossFit, HIIT/SWEAT. Des coachs pros, une ambiance inclusive,
+          des résultats mesurables.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <!-- Ouvre le modal TeamUp -->
+          <button data-open-lead class="btn-primary">Nous contacter</button>
+          <a href="/tarifs" class="btn-ghost">Voir les tarifs</a>
+        </div>
+        <dl class="mt-8 grid grid-cols-2 gap-6 text-sm md:max-w-md">
+          <div><dt class="text-slate-500">Membres actifs</dt><dd class="text-xl font-bold">400+</dd></div>
+          <div><dt class="text-slate-500">Séances / semaine</dt><dd class="text-xl font-bold">60+</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALEURS / POURQUOI NOUS -->
+  <section class="mt-12">
+    <h2 class="text-2xl font-semibold">Pourquoi nous choisir ?</h2>
+    <div class="mt-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">
+      <article class="card">
+        <div class="mb-2 text-2xl">🏋️‍♀️</div>
+        <h3 class="font-semibold">Coaching premium</h3>
+        <p class="mt-2 text-sm text-slate-600">Encadrement serré, adaptations selon ton niveau.</p>
+      </article>
+      <article class="card">
+        <div class="mb-2 text-2xl">🤝</div>
+        <h3 class="font-semibold">Communauté</h3>
+        <p class="mt-2 text-sm text-slate-600">Ambiance motivante & inclusive, zéro jugement.</p>
+      </article>
+      <article class="card">
+        <div class="mb-2 text-2xl">📈</div>
+        <h3 class="font-semibold">Résultats</h3>
+        <p class="mt-2 text-sm text-slate-600">Programmation éprouvée, progression suivie.</p>
+      </article>
+      <article class="card">
+        <div class="mb-2 text-2xl">🗓️</div>
+        <h3 class="font-semibold">Horaire flexible</h3>
+        <p class="mt-2 text-sm text-slate-600">Séances du matin au soir + Open Gym.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- APERÇU HORAIRE -->
+  <section class="mt-12 rounded-2xl border bg-gradient-to-br from-brand-50 to-white p-6 md:p-8">
+    <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl font-semibold">Réserve ta séance</h2>
+        <p class="mt-2 text-slate-600">
+          Découvre les prochains cours et book direct. CrossFit, HIIT/SWEAT et Open Gym.
+        </p>
+      </div>
+      <div class="flex gap-3">
+        <a href="/horaire" class="btn-primary">Voir l’horaire</a>
+        <a href="/tarifs" class="btn-ghost">Nos tarifs</a>
+      </div>
+    </div>
+    <!-- si tu veux intégrer l’iframe TeamUp directement ici, remplace le bloc ci-dessus
+         par ton iframe (comme sur /horaire). -->
+  </section>
+
+  <!-- PROGRAMMES -->
+  <section class="mt-12">
+    <h2 class="text-2xl font-semibold">Nos programmes</h2>
+    <div class="mt-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1200&auto=format&fit=crop"
+             alt="Cours de CrossFit" class="h-40 w-full rounded-xl object-cover" loading="lazy" />
+        <h3 class="mt-4 font-semibold">CrossFit</h3>
+        <p class="mt-2 text-sm text-slate-600">WODs variés, force, conditioning, gym.</p>
+        <!-- Ouvre le modal TeamUp -->
+        <a href="#" data-open-lead class="mt-4 btn-primary w-full">Essayer</a>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1518609571773-39b7d303a82d?q=80&w=1200&auto=format&fit=crop"
+             alt="Cours HIIT/SWEAT" class="h-40 w-full rounded-xl object-cover" loading="lazy" />
+        <h3 class="mt-4 font-semibold">HIIT / SWEAT</h3>
+        <p class="mt-2 text-sm text-slate-600">Cardio & brûlage — accessible à tous.</p>
+        <!-- Ouvre le modal TeamUp -->
+        <a href="#" data-open-lead class="mt-4 btn-primary w-full">Essayer</a>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2e2870?q=80&w=1200&auto=format&fit=crop"
+             alt="Open Gym" class="h-40 w-full rounded-xl object-cover" loading="lazy" />
+        <h3 class="mt-4 font-semibold">Open Gym</h3>
+        <p class="mt-2 text-sm text-slate-600">Accès libre à l’espace pour t’entraîner.</p>
+        <a href="/tarifs" class="mt-4 btn-ghost w-full">Voir options</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- TÉMOIGNAGES -->
+  <section class="mt-12">
+    <h2 class="text-2xl font-semibold">Ce que disent nos membres</h2>
+    <div class="mt-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+      <figure class="card">
+        <blockquote class="text-slate-700">
+          “Coachs incroyables, j’ai progressé plus vite en 3 mois qu’en 2 ans seul.”
+        </blockquote>
+        <figcaption class="mt-4 text-sm font-semibold">— Alex M.</figcaption>
+      </figure>
+      <figure class="card">
+        <blockquote class="text-slate-700">
+          “Ambiance de feu mais super inclusive. J’avais peur au début, plus maintenant.”
+        </blockquote>
+        <figcaption class="mt-4 text-sm font-semibold">— Sam M.</figcaption>
+      </figure>
+      <figure class="card">
+        <blockquote class="text-slate-700">
+          “Horaire flexible, facile de concilier avec le boulot. Mes PR explosent.”
+        </blockquote>
+        <figcaption class="mt-4 text-sm font-semibold">— Marie M.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mt-12">
+    <h2 class="text-2xl font-semibold">FAQ</h2>
+    <div class="mt-6 grid gap-4">
+      <details class="card">
+        <summary class="cursor-pointer font-semibold">Je débute, je commence par quoi ?</summary>
+        <p class="mt-2 text-sm text-slate-600">
+          Inscris-toi à <strong>l’intro CrossFit</strong> (1 semaine illimitée ou blocs 6 semaines).
+          Tu seras accompagné·e dès la première séance.
+        </p>
+      </details>
+      <details class="card">
+        <summary class="cursor-pointer font-semibold">Puis-je essayer avant de m’abonner ?</summary>
+        <p class="mt-2 text-sm text-slate-600">
+          Oui ! Vois <a href="/tarifs" class="underline">nos options d’essai</a> (CrossFit & HIIT/SWEAT).
+        </p>
+      </details>
+      <details class="card">
+        <summary class="cursor-pointer font-semibold">C’est pour quel niveau ?</summary>
+        <p class="mt-2 text-sm text-slate-600">
+          Tous niveaux. On adapte les mouvements & charges à chaque personne.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="mt-12 rounded-2xl border bg-white p-6 text-center md:p-10">
+    <h2 class="text-3xl font-extrabold tracking-tight">On s’entraîne ?</h2>
+    <p class="mt-2 text-slate-600">Réserve un essai et rejoins la communauté.</p>
+    <div class="mt-6 flex justify-center gap-3">
+      <!-- Ouvre le modal TeamUp -->
+      <a href="#" data-open-lead class="btn-primary">Je m’inscris</a>
+      <a href="/horaire" class="btn-ghost">Voir l’horaire</a>
+    </div>
+  </section>
+
+  <!-- ====== MODAL TEAMUP ====== -->
+  <div id="leadModal" class="fixed inset-0 z-[60] hidden">
+    <!-- Backdrop -->
+    <div id="leadBackdrop" class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+
+    <!-- Panel -->
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="w-full max-w-2xl rounded-2xl border bg-white shadow-card relative">
+        <button id="closeLead" class="absolute right-2 top-2 rounded-full border px-2 py-1 text-sm">Fermer ✕</button>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold mb-3">Commencer un essai</h3>
+          <p class="text-slate-600 mb-4">Laisse-nous tes coordonnées et on te répond rapidement.</p>
+
+          <!-- Conteneur cible explicite -->
+          <div id="teamup-lead-form-container" class="min-h-[520px]"></div>
+
+          <!-- Loader -->
+          <div id="leadLoader" class="flex items-center justify-center py-12 text-slate-500">Chargement…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style is:global>
+    /* sécurité d’affichage de l’iframe TeamUp */
+    #leadModal iframe { width:100% !important; min-height:520px; display:block; }
+  </style>
+
+  <!-- SDK TeamUp -->
+  <script src="https://teamupstatic.com/teamup.js" defer></script>
+
+  <!-- Contrôle du modal -->
+  <script is:inline>
+    (function () {
+      const modal = document.getElementById('leadModal');
+      const closeBtn = document.getElementById('closeLead');
+      const backdrop = document.getElementById('leadBackdrop');
+      const mount = document.getElementById('teamup-lead-form-container');
+      const loader = document.getElementById('leadLoader');
+      const openers = Array.from(document.querySelectorAll('[data-open-lead]'));
+
+      let mounted = false;
+      let sdkReady = false;
+
+      // prêt quand le SDK est chargé
+      window.addEventListener('load', () => {
+        sdkReady = !!(window.teamup && typeof window.teamup.lead_form === 'function');
+      });
+
+      function mountLeadForm() {
+        if (!sdkReady) return false;
+        mount.innerHTML = '';
+        loader?.classList.add('hidden');
+        teamup.lead_form({
+          provider_id: 22569,
+          width: "100%",
+          version: 3,
+          lead_form_id: "862b9968-ddf5-4dce-95ef-198cd07c3f79",
+          container: "#teamup-lead-form-container",
+          container_id: "teamup-lead-form-container",
+        });
+        mounted = true;
+        return true;
+      }
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (!mounted) {
+          if (!mountLeadForm()) {
+            let tries = 0;
+            const iv = setInterval(() => {
+              tries++;
+              if (mountLeadForm() || tries > 20) clearInterval(iv); // ~2s max
+            }, 100);
+          }
+        }
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      openers.forEach(el =>
+        el.addEventListener('click', (e) => { e.preventDefault(); openModal(); })
+      );
+      closeBtn?.addEventListener('click', closeModal);
+      backdrop?.addEventListener('click', closeModal);
+      window.addEventListener('keydown', (e) => e.key === 'Escape' && !modal.classList.contains('hidden') && closeModal());
+    })();
+  </script>
+</Base>
