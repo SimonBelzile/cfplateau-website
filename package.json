@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "astro-google-fonts-optimizer": "^0.2.2",
-    "npx": "^3.0.0",
-    "express": "^4.21.0"
+    "express": "^4.21.2",
+    "npx": "^3.0.0"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
