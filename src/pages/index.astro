@@ -1,28 +1,47 @@
 ---
-import Base from "../layouts/BaseLayout.astro";
 import AvisGoogle from "../components/AvisGoogle.astro";
-import { Image } from 'astro:assets';
+import Base from "@/layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import hero from "@/assets/group-photo.webp";
+
 
 // Move these files to src/assets/ with the same names:
-import hero from "../assets/group-photo.webp";
 import card1 from "../assets/group-PP.webp";
 import card2 from "../assets/hiit-main.webp";
 import card3 from "../assets/pat-correctif-deadlift.webp";
+
+const h = await getImage({
+  src: hero,
+  widths: [640, 960, 1280],           // inutile de générer 1920 pour mobile
+  formats: ["avif", "webp"],          // AVIF + WebP => meilleur LCP
+  quality: 78                         // baisse un peu la qualité pour réduire le poids
+});
 ---
 
 <Base title="Abattoir CrossFit Plateau — Bienvenue">
 
-  <!-- HERO plein écran avec overlay -->
+  <head slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={h.src}
+      imagesrcset={h.srcset}
+      imagesizes="100vw"
+      fetchpriority="high" />
+  </head>
+
+  <!-- HERO -->
   <section class="relative isolate h-[68svh] md:h-[72svh] lg:h-[76svh] min-h-[520px] w-screen ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] overflow-hidden">
-    <!-- Image de fond -->
     <Image
       src={hero}
       alt="Abattoir CrossFit — entraînement"
       class="absolute inset-0 h-full w-full object-cover object-center z-0"
-      widths={[640, 960, 1280, 1600, 1920]}
+      widths={[640, 960, 1280]}
       sizes="100vw"
+      formats={["avif","webp"]}        /* même couple que le preload */
+      quality={78}
       loading="eager"
-      format="webp"
+      fetchpriority="high"             /* donne un coup de pouce au LCP */
     />
 
     <!-- Overlay au-dessus de l'image -->
