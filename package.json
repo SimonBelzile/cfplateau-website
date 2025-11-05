@@ -10,11 +10,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "start": "node server.mjs"
   },
   "dependencies": {
     "astro-google-fonts-optimizer": "^0.2.2",
-    "npx": "^3.0.0"
+    "npx": "^3.0.0",
+    "express": "^4.21.0"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
