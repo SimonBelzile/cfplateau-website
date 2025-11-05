@@ -4,21 +4,15 @@ import { getCollection } from "astro:content";
 
 const PAGE_SIZE = 9;
 
-export async function getStaticPaths() {
-  // une seule page: /blog/
-  return [{ params: {}, props: {} }];
-}
-
 const all = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
 
+const lastPage = Math.max(1, Math.ceil(all.length / 9));
+const pagePosts = all.slice(0, 9);
 const current = 1;
-const lastPage = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
-const pagePosts = all.slice(0, PAGE_SIZE);
 ---
-
 <BaseLayout title="Blog — Abattoir CrossFit Plateau">
-  <!-- (recyclage du markup de la page ci-dessus, mais sans le lien “Précédent”) -->
+  <!-- même markup de grille + pagination (sans “Précédent”) -->
   <section class="max-w-6xl mx-auto">
     <header class="mb-8">
       <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Blog</h1>
@@ -32,7 +26,7 @@ const pagePosts = all.slice(0, PAGE_SIZE);
             {p.data.heroImage ? (
               <img src={p.data.heroImage} alt="" loading="lazy" class="w-full aspect-[13/9] object-cover rounded-t-2xl" />
             ) : (
-              <div class="w-full aspect-[13/9] rounded-t-2xl bg-gradient-to-br from-black to white/10" />
+              <div class="w-full aspect-[13/9] rounded-t-2xl bg-gradient-to-br from-black to-white/10" />
             )}
           </a>
           <div class="p-4">

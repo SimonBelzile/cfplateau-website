@@ -4,38 +4,35 @@ import { getCollection } from "astro:content";
 
 const PAGE_SIZE = 9;
 
-// getStaticPaths: génère /blog/1, /blog/2, ...
+// Génère /blog/1, /blog/2, ...
 export async function getStaticPaths() {
   const all = (await getCollection("blog", ({ data }) => !data.draft))
-    .sort((a,b)=>+new Date(b.data.pubDate)-+new Date(a.data.pubDate));
+    .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
 
-  const PAGE_SIZE = 9;
-  const lastPage = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  const lastPage = Math.max(1, Math.ceil(all.length / 9));
 
   return Array.from({ length: lastPage }, (_, i) => {
     const current = i + 1;
-    const start = (current - 1) * PAGE_SIZE;
-    const pagePosts = all.slice(start, start + PAGE_SIZE);
+    const start = (current - 1) * 9;
+    const pagePosts = all.slice(start, start + 9);
 
     return {
-      // 🔴 AVANT: params: { page: [String(current)] }
-      // ✅ MAINTENANT: string (pour un catch-all c’est "2", ou "2025/11" s’il y avait plusieurs segments)
+      // ✅ catch-all: string, PAS un tableau
       params: { page: String(current) },
+      // ✅ on passe tout dans props, rien à recalculer au rendu
       props: { current, lastPage, pagePosts },
     };
   });
 }
-const { all, current, lastPage } = Astro.props as {
-  all: any[];
+
+// ✅ on récupère uniquement ce qu'on a passé
+const { current, lastPage, pagePosts } = Astro.props as {
   current: number;
   lastPage: number;
+  pagePosts: any[];
 };
-
-const start = (current - 1) * 9;
-const pagePosts = all.slice(start, start + 9);
 ---
-
-<BaseLayout title="Blog — Abattoir CrossFit Plateau" description="Conseils entraînement, nutrition, WODs et coulisses du gym.">
+<BaseLayout title="Blog — Abattoir CrossFit Plateau" description="Conseils entraînement, nutrition, et coulisses du gym.">
   <section class="max-w-6xl mx-auto">
     <header class="mb-8">
       <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Blog</h1>
@@ -58,12 +55,12 @@ const pagePosts = all.slice(start, start + 9);
             </h3>
             {p.data.description && <p class="mt-2 text-sm text-white/70">{p.data.description}</p>}
             <p class="mt-3 text-xs text-white/50">{p.data.pubDate.toLocaleDateString('fr-CA')}</p>
-
             {p.data.tags?.length > 0 && (
               <div class="mt-3 flex flex-wrap gap-2">
                 {p.data.tags.map((t) => (
-                  <a href={`/tag/${encodeURIComponent(t)}/`} class="rounded-full border px-3 py-1 text-xs"
-                     style="border-color:#ddb669; color:#ddb669">#{t}</a>
+                  <a href={`/tag/${encodeURIComponent(t)}/`} class="rounded-full border px-3 py-1 text-xs" style="border-color:#ddb669; color:#ddb669">
+                    #{t}
+                  </a>
                 ))}
               </div>
             )}
@@ -72,17 +69,13 @@ const pagePosts = all.slice(start, start + 9);
       ))}
     </div>
 
-    <!-- Pagination inline -->
     <nav class="flex items-center justify-center gap-3 mt-10">
       {current > 1 ? (
-        <a href={current - 1 === 1 ? "/blog/" : `/blog/${current - 1}/`}
-           class="btn-ghost">← Précédent</a>
+        <a href={current - 1 === 1 ? "/blog/" : `/blog/${current - 1}/`} class="btn-ghost">← Précédent</a>
       ) : (
         <span class="btn-ghost opacity-40 pointer-events-none">← Précédent</span>
       )}
-
       <span class="text-white/70 text-sm">Page {current} / {lastPage}</span>
-
       {current < lastPage ? (
         <a href={`/blog/${current + 1}/`} class="btn-primary">Suivant →</a>
       ) : (
