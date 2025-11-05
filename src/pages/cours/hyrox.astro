@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Accordion from "@/components/Accordion.astro";
+const title = "Hyrox";
+const desc  = "Course + stations fonctionnelles. Puissance aérobie, capacité lactique, pacing — format compétition.";
+const horaires = `
+<ul>
+  <li>Mardi : 18h00</li>
+  <li>Jeudi : 19h00</li>
+  <li>Samedi : 10h30</li>
+</ul>`;
+const essai = `<p>Tu veux tester ? <a href="/contact">Contacte-nous</a> pour une séance découverte.</p>`;
+---
+<BaseLayout title={`${title} — Abattoir CrossFit Plateau`} description={desc}>
+  <section class="grid md:grid-cols-2 gap-10 items-center">
+    <img src="/images/hyrox-hero.webp" alt="" class="w-full rounded-xl object-cover" />
+    <div>
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">{title}</h1>
+      <p class="mt-3 text-white/70">{desc}</p>
+      <ul class="mt-6 space-y-2 text-white/80 list-disc pl-5">
+        <li>Run pacing & transitions</li>
+        <li>Technique des stations (sled, farmer, lunges, wall balls…)</li>
+        <li>Gestion de l’intensité & stratégie</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid md:grid-cols-2 gap-10 items-start mt-14">
+    <img src="/images/hyrox-2.webp" alt="" class="w-full rounded-xl object-cover" />
+    <Accordion items={[
+      { title: "Nos cours", content: `<ul>
+        <li>CrossFit</li><li>Hyrox</li><li>Sweat / HIIT</li><li>Introduction au CrossFit</li>
+      </ul>` },
+      { title: "Horaires", content: horaires },
+      { title: "Essai", content: essai },
+    ]}/>
+  </section>
+</BaseLayout>

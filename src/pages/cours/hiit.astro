@@ -1,0 +1,37 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Accordion from "@/components/Accordion.astro";
+const title = "Sweat / HIIT";
+const desc  = "Sessions intenses, efficaces et accessibles. Cardio, intervalles, renforcement léger : transpire, progresse, recommence.";
+const horaires = `
+<ul>
+  <li>Lundi : 6h30 et 18h00</li>
+  <li>Mercredi : 18h00</li>
+  <li>Jeudi : 6h30 et 17h30</li>
+</ul>`;
+const essai = `<p>Réserve ton essai : <a href="/comment-debuter">page Commencer</a> ou <a href="/contact">Nous joindre</a>.</p>`;
+---
+<BaseLayout title={`${title} — Abattoir CrossFit Plateau`} description={desc}>
+  <section class="grid md:grid-cols-2 gap-10 items-start">
+    <img src="/images/hiit-hero.webp" alt="" class="w-full rounded-xl object-cover" />
+    <div>
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">{title}</h1>
+      <p class="mt-3 text-white/70">{desc}</p>
+      <ul class="mt-6 space-y-2 text-white/80 list-disc pl-5">
+        <li>Échauffement dynamique ciblé</li>
+        <li>Intervalles cardio/renfo (adaptables)</li>
+        <li>Cool-down et mobilité</li>
+      </ul>
+
+      <div class="mt-8">
+        <Accordion items={[
+          { title: "Nos cours", content: `<ul>
+            <li>CrossFit</li><li>Hyrox</li><li>Sweat / HIIT</li><li>Introduction au CrossFit</li>
+          </ul>` },
+          { title: "Horaires", content: horaires },
+          { title: "Essai", content: essai },
+        ]}/>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

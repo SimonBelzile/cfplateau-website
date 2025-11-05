@@ -57,6 +57,43 @@ const og = ogImage ?? "/group-photo.webp";
 
         <!-- Desktop links -->
         <div class="hidden md:flex items-center gap-6">
+          <!-- NOS COURS (dropdown non-cliquable) -->
+          <div class="relative group">
+            <button
+              class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80 inline-flex items-center"
+              aria-haspopup="true" aria-expanded="false" id="cours-btn"
+              type="button"
+            >
+              Nos cours
+              <svg class="ml-1 h-3 w-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M5.5 7.5 10 12l4.5-4.5" />
+              </svg>
+            </button>
+
+            <div class="absolute left-0 top-full pt-2 z-50">
+              <div
+                class="w-64 rounded-xl border bg-white shadow-lg p-2
+                      opacity-0 translate-y-1 pointer-events-none
+                      transition duration-150
+                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                      group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto"
+                role="menu" aria-labelledby="cours-btn"
+              >
+                <a href="/cours/crossfit" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  CrossFit
+                </a>
+                <a href="/cours/hyrox" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  Hyrox
+                </a>
+                <a href="/cours/hiit" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  Sweat / HIIT
+                </a>
+                <a href="/comment-debuter" class="block rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/5" role="menuitem">
+                  Introduction au CrossFit
+                </a>
+              </div>
+            </div>
+          </div>
           <a href="/horaire" class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80">Horaire</a>
           <a href="/tarifs"  class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80">Tarifs</a>
           <a href="/comment-debuter" class="!text-black text-[15px] md:text-base font-semibold hover:!text-black/80">Commencer</a>
@@ -130,6 +167,14 @@ const og = ogImage ?? "/group-photo.webp";
           </button>
         </div>
         <div class="max-w-6xl mx-auto px-4 pb-4 grid gap-2">
+          <!-- NOS COURS -->
+          <div class="rounded-lg border bg-white">
+            <div class="px-3 pt-3 pb-1 text-xs uppercase tracking-wider text-slate-500">Nos cours</div>
+            <a href="/cours/crossfit" class="block px-3 py-2 text-black hover:bg-black/5">CrossFit</a>
+            <a href="/cours/hyrox"    class="block px-3 py-2 text-black hover:bg-black/5">Hyrox</a>
+            <a href="/cours/hiit"     class="block px-3 py-2 text-black hover:bg-black/5">Sweat / HIIT</a>
+            <a href="/comment-debuter" class="block px-3 py-2 text-black hover:bg-black/5">Introduction au CrossFit</a>
+          </div>
           <a href="/horaire" class="block rounded-lg px-3 py-2 font-semibold text-black hover:bg-black/5">Horaire</a>
           <a href="/tarifs" class="block rounded-lg px-3 py-2 font-semibold text-black hover:bg-black/5">Tarifs</a>
           <a href="/comment-debuter" class="block rounded-lg px-3 py-2 font-semibold text-black hover:bg-black/5">Commencer</a>
