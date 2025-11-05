@@ -2,11 +2,30 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const { tag } = Astro.params;
-const posts = (await getCollection("blog", ({ data }) => !data.draft && data.tags?.includes(tag!)))
-  .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
----
+// Génère /tag/<tag> pour chaque tag présent dans les posts publiés
+export async function getStaticPaths() {
+  const all = await getCollection("blog", ({ data }) => !data.draft);
 
+  // liste unique de tags (stringifiés pour éviter les surprises)
+  const tags = Array.from(
+    new Set(
+      all.flatMap((p) => (p.data.tags ?? []).map((t) => String(t)))
+    )
+  );
+
+  return tags.map((t) => ({
+    params: { tag: t }, // <-- string simple
+    props: {
+      tag: t,
+      posts: all
+        .filter((p) => (p.data.tags ?? []).map(String).includes(t))
+        .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props as { tag: string; posts: any[] };
+---
 <BaseLayout title={`#${tag} — Abattoir CrossFit Plateau`}>
   <section class="max-w-6xl mx-auto">
     <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-6">#{tag}</h1>
