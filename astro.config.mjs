@@ -11,4 +11,9 @@ export default defineConfig({
     optimizer(),            // OK après tailwind
     // … d’autres intégrations si besoin
   ],
+  vite: {
+      ssr: {
+        noExternal: ['astro-google-fonts-optimizer'],  // ← important
+      },
+    },
 });
